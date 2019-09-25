@@ -1,0 +1,62 @@
+{
+	"countries": {
+		"England": {
+			"prices": {
+				"2": 14995,
+				"3": 20725,
+				"4": 26795
+			},
+			"ticket": 1000,
+			"extraOption": {
+				"name": "weekend trip to Ireland",
+				"price": 145,
+				"currency": "GBP",
+				"rate": 932.78
+			}
+		},
+		"USA": {
+			"prices": {
+				"2": 18625,
+				"3": 26825,
+				"4": 34850
+			},
+			"ticket": 6000,
+			"extraOption": {
+				"name": "weekend trip to Washington",
+				"price": 290,
+				"currency": "USD",
+				"rate": 658.21
+			}
+		},
+		"Malta": {
+			"prices": {
+				"2": 8650,
+				"3": 12425,
+				"4": 16175
+			},
+			"hotel": {
+				"2": 11525,
+				"3": 16750,
+				"4": 21650
+			},
+			"ticket": 2200,
+			"extraOption": {
+				"name": "diving course",
+				"price": 330,
+				"currency": "EUR",
+				"rate": 744.17
+			}
+		}
+	},
+	"jobs": {
+		"bakery": {
+			"pay": 85,
+			"weekdays": [6]
+		},
+		"cinema": {
+			"pay": 77,
+			"weekdays": [0, 1, 2, 3, 4]
+		}
+	},
+	"weekOptions": [2, 3, 4]
+}
