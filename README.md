@@ -1,4 +1,4 @@
-[Try it here](savings-for-a-language-trip.tobias-sn.ml)
+[Try it here](https://savings-for-a-language-trip.tobias-sn.ml)
 
 A web app made for a school assignment I got. It goes as follows:
 
