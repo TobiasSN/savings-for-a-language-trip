@@ -1,7 +1,7 @@
 <template>
 	<v-app dark>
 		<v-content>
-			<v-container fluid fill-height col-12 col-sm-8>
+			<v-container>
 				<v-layout justify-center>
 					<v-card>
 						<v-card-text>
@@ -73,37 +73,31 @@
 								<p>
 									<h2 class="display-2">Results</h2>
 								</p>
-								<v-row>
-									<v-col cols="8">
-										<v-simple-table>
-											<caption>Job schedule</caption>
-											<thead>
-												<tr>
-													<th>Weekday</th>
-													<th>Where</th>
-												</tr>
-											</thead>
-											<tr v-for="i in 7" :key="'weekday-' + i">
-												<td>{{ weekdays[i - 1] }}</td>
-												<td>{{ firstUpper(jobDays[i - 1] ? jobDays[i - 1] : "Day off") }}</td>
-											</tr>
-										</v-simple-table>
-									</v-col>
-									<v-col cols="4">
-										<p>
-											You'll need to work <b>{{ avgDailyHours.toFixed(2) }}</b> hours a day on average, except when you have a day off.
-										</p>
-										<p>
-											This will earn you <b>{{ format(avgPayPerHour) }}</b> per hour on average (Taking into account labor market contributions).
-										</p>
-										<p>
-											That means you'll earn <b>{{ format(avgPayPerWeek) }}</b> on average per week.
-										</p>
-										<p>
-											This way, you'll earn <b>{{ format(totalPay) }}</b> during the school year after interest.
-										</p>
-									</v-col>
-								</v-row>
+								<v-simple-table>
+									<caption>Job schedule</caption>
+									<thead>
+										<tr>
+											<th>Weekday</th>
+											<th>Where</th>
+										</tr>
+									</thead>
+									<tr v-for="i in 7" :key="'weekday-' + i">
+										<td>{{ weekdays[i - 1] }}</td>
+										<td>{{ firstUpper(jobDays[i - 1] ? jobDays[i - 1] : "Day off") }}</td>
+									</tr>
+								</v-simple-table>
+								<p>
+									You'll need to work <b>{{ avgDailyHours.toFixed(2) }}</b> hours a day on average, except when you have a day off.
+								</p>
+								<p>
+									This will earn you <b>{{ format(avgPayPerHour) }}</b> per hour on average (Taking into account labor market contributions).
+								</p>
+								<p>
+									That means you'll earn <b>{{ format(avgPayPerWeek) }}</b> on average per week.
+								</p>
+								<p>
+									This way, you'll earn <b>{{ format(totalPay) }}</b> during the school year after interest.
+								</p>
 							</div>
 						</v-card-text>
 					</v-card>
