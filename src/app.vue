@@ -1,116 +1,112 @@
 <template>
 	<v-app dark>
 		<v-content>
-			<v-container fluid fill-height>
+			<v-container fluid fill-height col-12 col-sm-8>
 				<v-layout justify-center>
-					<v-flex align-center sm8>
-						<v-card>
-							<v-card-text>
-								<!-- Trip options -->
-								<div>
-									<v-select :items="countryNames" v-model="countryName">
-										<template v-slot:label>
-											Country
-										</template>
-									</v-select>
-									<v-row align="center">
-										<v-col cols="4" v-if="hasHotel">
-											<v-radio-group v-model="atHotel">
-												<v-radio label="Host family or dormitory" :value="false"></v-radio>
-												<v-radio label="Hotel" :value="true"></v-radio>
-											</v-radio-group>
-										</v-col>
-										<v-col :cols="hasHotel ? 8 : 12">
-											<v-slider
-												min="2"
-												max="4"
-												ticks="always"
-												:tick-labels="weekOptions"
-												v-model="weeks"
-											>
-												<template v-slot:label>
-													Weeks
-												</template>
-											</v-slider>
-										</v-col>
-									</v-row>
-									<v-checkbox
-										:label="`Do you want a ${country.extraOption.name} while there? (${country.extraOption.price} ${country.extraOption.currency})`"
-										v-model="extraOption"
-									>
-									</v-checkbox>
-								</div>
-								<!-- Invoice -->
-								<div>
-									<v-simple-table>
-										<caption>Invoice</caption>
-										<thead>
-											<tr>
-												<th>Item</th>
-												<th>Price</th>
-											</tr>
-										</thead>
-										<tbody>
-											<invoice-row
-												v-for="item in invoiceItems"
-												:key="item.id"
-												:label="item.name"
-												:desc="item.desc"
-												:amount="item.price"
-											></invoice-row>
-											<invoice-row
-												class="font-weight-bold"
-												label="Total"
-												:amount="total"
-											></invoice-row>
-											<invoice-row
-												class="font-weight-bold"
-												label="You need to pay"
-												desc="Half of total"
-												:amount="needToPay"
-											></invoice-row>
-										</tbody>
-									</v-simple-table>
-								</div>
-								<div>
-									<p>
-										<h2 class="display-2">Results</h2>
-									</p>
-									<v-row>
-										<v-col cols="8">
-											<v-simple-table>
-												<caption>Job schedule</caption>
-												<thead>
-													<tr>
-														<th>Weekday</th>
-														<th>Where</th>
-													</tr>
-												</thead>
-												<tr v-for="i in 7" :key="'weekday-' + i">
-													<td>{{ weekdays[i - 1] }}</td>
-													<td>{{ firstUpper(jobDays[i - 1] ? jobDays[i - 1] : "Day off") }}</td>
+					<v-card>
+						<v-card-text>
+							<!-- Trip options -->
+							<div>
+								<v-select :items="countryNames" v-model="countryName">
+									<template v-slot:label>
+										Country
+									</template>
+								</v-select>
+									<v-container col-12 col-sm-4 d-inline-block v-if="hasHotel">
+										<v-radio-group v-model="atHotel">
+											<v-radio label="Host family or dormitory" :value="false"></v-radio>
+											<v-radio label="Hotel" :value="true"></v-radio>
+										</v-radio-group>
+									</v-container>
+									<v-container :col-sm-8="hasHotel" :col-sm-12="!hasHotel" d-inline-block>
+										<v-slider
+											min="2"
+											max="4"
+											ticks="always"
+											:tick-labels="weekOptions"
+											v-model="weeks"
+										>
+											<template v-slot:label>
+												Weeks
+											</template>
+										</v-slider>
+									</v-container>
+								<v-checkbox
+									:label="`Do you want a ${country.extraOption.name} while there? (${country.extraOption.price} ${country.extraOption.currency})`"
+									v-model="extraOption"
+								>
+								</v-checkbox>
+							</div>
+							<!-- Invoice -->
+							<div>
+								<v-simple-table>
+									<caption>Invoice</caption>
+									<thead>
+										<tr>
+											<th>Item</th>
+											<th>Price</th>
+										</tr>
+									</thead>
+									<tbody>
+										<invoice-row
+											v-for="item in invoiceItems"
+											:key="item.id"
+											:label="item.name"
+											:desc="item.desc"
+											:amount="item.price"
+										></invoice-row>
+										<invoice-row
+											class="font-weight-bold"
+											label="Total"
+											:amount="total"
+										></invoice-row>
+										<invoice-row
+											class="font-weight-bold"
+											label="You need to pay"
+											desc="Half of total"
+											:amount="needToPay"
+										></invoice-row>
+									</tbody>
+								</v-simple-table>
+							</div>
+							<div>
+								<p>
+									<h2 class="display-2">Results</h2>
+								</p>
+								<v-row>
+									<v-col cols="8">
+										<v-simple-table>
+											<caption>Job schedule</caption>
+											<thead>
+												<tr>
+													<th>Weekday</th>
+													<th>Where</th>
 												</tr>
-											</v-simple-table>
-										</v-col>
-										<v-col cols="4">
-											<p>
-												You'll need to work <b>{{ avgDailyHours.toFixed(2) }}</b> hours a day on average, except when you have a day off.
-											</p>
-											<p>
-												This will earn you <b>{{ format(avgPayPerHour) }}</b> per hour on average (Taking into account labor market contributions).
-											</p>
-											<p>
-												That means you'll earn <b>{{ format(avgPayPerWeek) }}</b> on average per week.
-											</p>
-											<p>
-												This way, you'll earn <b>{{ format(totalPay) }}</b> during the school year after interest.
-											</p>
-										</v-col>
-									</v-row>
-								</div>
-							</v-card-text>
-						</v-card>
-					</v-flex>
+											</thead>
+											<tr v-for="i in 7" :key="'weekday-' + i">
+												<td>{{ weekdays[i - 1] }}</td>
+												<td>{{ firstUpper(jobDays[i - 1] ? jobDays[i - 1] : "Day off") }}</td>
+											</tr>
+										</v-simple-table>
+									</v-col>
+									<v-col cols="4">
+										<p>
+											You'll need to work <b>{{ avgDailyHours.toFixed(2) }}</b> hours a day on average, except when you have a day off.
+										</p>
+										<p>
+											This will earn you <b>{{ format(avgPayPerHour) }}</b> per hour on average (Taking into account labor market contributions).
+										</p>
+										<p>
+											That means you'll earn <b>{{ format(avgPayPerWeek) }}</b> on average per week.
+										</p>
+										<p>
+											This way, you'll earn <b>{{ format(totalPay) }}</b> during the school year after interest.
+										</p>
+									</v-col>
+								</v-row>
+							</div>
+						</v-card-text>
+					</v-card>
 				</v-layout>
 			</v-container>
 		</v-content>
