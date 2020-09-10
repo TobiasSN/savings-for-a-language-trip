@@ -1,3 +1,5 @@
+This repo is archived in the hope that Dependabot will stop bugging me with pull requests to fix outdated dependencies. I know there's probably another way, but I'm too lazy to find it.
+
 [Try it here](https://savings-for-a-language-trip.tobias-sn.ml)
 
 A web app made for a school assignment I got. It goes as follows:
